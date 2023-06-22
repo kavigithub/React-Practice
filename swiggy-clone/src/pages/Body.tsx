@@ -55,7 +55,6 @@ const Body = () => {
         {filterListRestaurent.map((item) => (
           <RestaruentCard restData={item?.data} key={item?.data?.id} />
         ))}
-        <p>test</p>
       </div>
     </div>
     </>  

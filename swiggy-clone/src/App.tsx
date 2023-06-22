@@ -8,6 +8,7 @@ import Body from './pages/Body';
 
 
 
+
 // interface abc :   const rows: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | React.ReactFragment | JSX.Element[] | null | undefined = [];
 /* 
 function ProductCategoryRow({}) {
@@ -76,5 +77,6 @@ function App() {
       </div>
   );
 }
+
 
 export default App;
