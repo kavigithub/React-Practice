@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom';
 const Title = () => (
     <a href="/">
       <img
@@ -22,9 +23,18 @@ const Header = () => {
   <Title />
   <div>
     <ul className="nav nav-pills">
-      <li className='nav-item p-1'>Home</li>
-      <li className='nav-item p-1'>About</li>
-      <li className='nav-item p-1'>Contact</li>
+      <li className='nav-item p-1'>
+        <Link to={'/'}>Home</Link>
+      </li>
+      <li className='nav-item p-1'>
+        <Link to={'/about'}> About</Link> 
+      </li>
+      <li className='nav-item p-1'>
+        <Link to={'/contact'}>Contact</Link>  
+      </li>
+      <li className='nav-item p-1'>
+        <Link to={'/smallApp'}>Test</Link>  
+      </li>
       <li className='nav-item p-1'>Cart</li>
       <button className='btn btn-primary mx-2' onClick={() => chnageLoginStatus(changeStatus)}>{changeStatus}</button>
     </ul>

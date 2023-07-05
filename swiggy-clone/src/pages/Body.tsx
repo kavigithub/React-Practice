@@ -3,6 +3,7 @@ import {apiData, callApi} from '../utils/constant';
 import RestaruentCard from './RestaruentCard';
 import { RestoObj } from '../utils/interface';
 import ShimmerEffect from './ShimmerEffect';
+import { Link } from 'react-router-dom';
 
 
 const Body = () => {
@@ -52,8 +53,13 @@ const Body = () => {
         }}>TOP Rated Restaurent Filter</button>
     </div>
     <div className="res-container">
-        {filterListRestaurent.map((item) => (
+        {/* {filterListRestaurent.map((item) => (
           <RestaruentCard restData={item?.data} key={item?.data?.id} />
+        ))} */}
+        {filterListRestaurent.map((item) => (
+          <Link key={item?.data?.id} to={"/restaurents/" + item?.data?.id}>
+            <RestaruentCard restData={item?.data} />
+          </Link>
         ))}
       </div>
     </div>

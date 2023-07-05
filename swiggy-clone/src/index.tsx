@@ -9,6 +9,9 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import About from './pages/About';
 import Contact from './pages/Contact';
 import ErrorComp from "./pages/ErrorComp";
+import Body from './pages/Body';
+import RestaurentMenu from './pages/RestaurentMenu';
+import Test from './pages/Test';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -19,16 +22,35 @@ const appRouter = createBrowserRouter([
   {
     path: '/',
     element: <App />,
-    errorElement: <ErrorComp />
+    children: [
+      {
+        path: '/',
+        element: <Body />,
+        errorElement: <ErrorComp />,
+      },
+      {
+        path: '/about',
+        element: <About />,
+        errorElement: <ErrorComp />,
+      },
+      {
+        path: '/contact',
+        element: <Contact />,
+        errorElement: <ErrorComp />,
+      },
+      {
+        path: '/restaurents/:restId',
+        element: <RestaurentMenu />,
+        errorElement: <ErrorComp />,
+      },
+      {
+        path: '/smallApp',
+        element: <Test />,
+        errorElement: <ErrorComp />,
+      }
+
+    ]
   }, 
-  {
-    path: '/about',
-    element: <About />
-  },
-  {
-    path: '/contact',
-    element: <Contact />
-  }
 ]);
 
 root.render(

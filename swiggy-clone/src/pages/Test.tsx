@@ -4,7 +4,7 @@ import Button from './Button';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const About = () => {
+const Test = () => {
   const [textNeedChange, setTextNeedChange] = useState('change text form');
 
   function makeCapitalText(textNeedChange: string){
@@ -48,4 +48,4 @@ const About = () => {
   )
 }
 
-export default About
+export default Test

@@ -5,6 +5,7 @@ import './App.css';
 import { JSX } from 'react/jsx-runtime';
 import Header from "./pages/Header";
 import Body from './pages/Body';
+import { Outlet } from 'react-router-dom';
 
 
 
@@ -73,7 +74,7 @@ function App() {
   return (
     <div className="App">
         <Header />
-        <Body />
+        <Outlet />
       </div>
   );
 }
