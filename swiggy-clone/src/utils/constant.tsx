@@ -9,7 +9,7 @@ export const callApi = async () => {
     return cards;
   }
 
- console.log(callApi, '....') 
+ //console.log(callApi, '....') 
 
   // eslint-disable-next-line @typescript-eslint/no-unused-expressions
  export const apiData = [

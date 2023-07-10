@@ -1,29 +1,17 @@
-import React ,{ useEffect, useState } from 'react';
 import ShimmerEffect from './ShimmerEffect';
-import { menuApi } from '../utils/constant';
 import { useParams } from 'react-router-dom';
+import useRestaurentMenu from '../utils/useRestaurentMenu';
 
 const RestaurentMenu = () => {
-    let [resInfo, setResInfo] = useState<any>(null);
-    const { restId } = useParams();
+   
+    const { restId }  = useParams();
+   // console.log(restId);
 
-  useEffect(() => {
-    fetchDataFrmApi();
-  }, [])  
+    const resInfo = useRestaurentMenu(restId);
 
-  const fetchDataFrmApi = async () => {
-    //const data = await fetch('https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=19.2039884&lng=72.8737017&restaurantId=19638&submitAction=ENTER');
-    const data = await fetch(menuApi + restId);
-    console.log(data, 'restId');
-    const json = await data.json();
-    //console.log(json.data);
-    setResInfo(json.data)
-  }
-  //console.log(resInfo);
-  //console.log(resInfo?.cards[0]?.card?.card?.info);
-  //console.log(resInfo?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards);
 
   if(resInfo === null) return <ShimmerEffect />
+  console.log(resInfo);
 
   const {name, costForTwoMessage, cuisines, avgRating, totalRatingsString, areaName} = resInfo?.cards[0]?.card?.card?.info;
 
