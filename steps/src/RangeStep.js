@@ -52,7 +52,7 @@ const RangeStep = () => {
             +
           </button>
         </div>
-
+         <hr />   
         <p>
           <span>
             {stepValue === 0
