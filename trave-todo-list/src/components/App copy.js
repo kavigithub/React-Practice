@@ -1,18 +1,24 @@
 import { useState } from 'react';
 import './App.css';
 
-const initialItems = [
+/* const initialItems = [
   { id: 1, description: "Passports", quantity: 2, packed: false },
   { id: 2, description: "Socks", quantity: 12, packed: false },
   { id: 3, description: "Charger", quantity: 1, packed: true },
-];
+]; */
 
 function App() {
+  const [items, setItems] = useState([]);
+  const handleAddItems = (newItem) => {
+    //console.log(newItem)
+    setItems((item) => [...item, newItem]);
+    console.log(items);
+  }
   return (
     <div className="App">
         <Logo />
-        <Form />
-        <PackingList />
+        <Form onAddItems={handleAddItems} />
+        <PackingList addItems={items}/>
         <Stats />
     </div>
   );
@@ -26,17 +32,26 @@ const Logo = () => {
   )
 }
 
-const Form = () => {
-  const [disciprtion, setDisciprtion] = useState("");
+const Form = ({ onAddItems }) => {
+  const [description, setDescription] = useState("");
   const [quantity, setQuantity] = useState(1);
+  
+  /* const handleAddItems = (newItem) => {
+    //console.log(newItem)
+    setItems((item) => [...item, newItem]);
+    console.log(items);
+  } */
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    if(!disciprtion) return;
 
-    const newItem = {disciprtion, quantity, packed: false, id: Date.now()}
-    console.log(newItem);
+    //if(!discription) return;
 
-    setDisciprtion('');
+    const newItem = { description, quantity, packed: false, id: Date.now() };
+    //console.log(newItem);
+    onAddItems(newItem);
+
+    setDescription('');
     setQuantity(1);
   }
 
@@ -49,20 +64,20 @@ const Form = () => {
           <option value={num} key={num}> {num}</option>
           ))}
         </select>
-        <input type='text' placeholder='Item...' value={disciprtion} onChange={(e) => setDisciprtion(e.target.value)} />
+        <input type='text' placeholder='Item...' value={description} onChange={(e) => setDescription(e.target.value)} />
         <button>Add</button>
       </form>
     </>
   )
 }
 
-const PackingList = () => {
+const PackingList = ({addItems}) => {
   return(
     <div className='list'>
       <ul>
-        {initialItems.map(item => (
+        {addItems.map(item => (
           <>
-            <li><ItemList listofItem={item} key={item.id}/></li>
+            <ItemList listofItem={item} key={item.id}/>
           </>
         ))}
       </ul>
@@ -72,13 +87,12 @@ const PackingList = () => {
 
 const ItemList = ({listofItem}) => {
   return(
-    <>
+    <li key={listofItem.id}>
       <span style={listofItem.packed ? {textDecoration: 'line-through'} : {}}>
-        {listofItem.description}
-        {listofItem.quantity}
+      {listofItem.quantity} {listofItem.description}
       </span>
       <button>❌</button>
-    </>
+    </li>
   )
 }
 
@@ -91,6 +105,5 @@ const Stats = () => {
     </>
   )
 }
-
 
 export default App;
