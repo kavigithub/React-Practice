@@ -19,6 +19,7 @@ function App() {
   }
 
   const handelDeleteItem = (id) => {
+     console.log(id);
     setItem((items) => items.filter((item) => item.id !== id))
   }
 

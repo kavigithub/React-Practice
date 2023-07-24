@@ -21,25 +21,14 @@ function App() {
     if(step > 1) setStep((s) => s - 1);
   }
 
-  const Button = ({bgColor, textColor, handleClickFun, children}) => {
+  const Button = ({bgColor, textColor, handleClickFun, btnText}) => {
     return(
       <button
               style={{ backgroundColor: bgColor, color: textColor }}
               onClick={handleClickFun}
             >
-            {children}
+              {btnText}
      </button>
-    )
-  }
-
-  const StepMessage = ({step, children}) => {
-    return(
-      <>
-        <div className="message">
-          <h3>Message {step}</h3>
-          <p>{children}</p>
-        </div>
-      </>
     )
   }
 
@@ -54,11 +43,24 @@ function App() {
             <div className={step >= 3 ? 'active': ''}>3</div>
           </div>
 
-          <StepMessage step={step}> {messages[step - 1]} </StepMessage>
+          <p className="message">
+            Message : { messages[step - 1]}
+          </p>
 
           <div className="buttons">
-            <Button bgColor="#7950f2" textColor="#fff" handleClickFun={previousMsg}> <span>👈🏻</span> Previous</Button>
-            <Button bgColor="#7950f2" textColor="#fff" handleClickFun={() => nextMsg()}> Next  <span>👉🏻</span></Button>
+            <Button bgColor="#7950f2" textColor="#fff" handleClickFun={previousMsg} btnText="Previous"/>
+            {/* <button
+              style={{ backgroundColor: "#7950f2", color: "#fff" }}
+              onClick={previousMsg}
+            >
+              Previous
+            </button> */}
+            <button
+              style={{ backgroundColor: "#7950f2", color: "#fff" }}
+              onClick={() => nextMsg()}
+            >
+              Next
+            </button>
           </div>
         </div>
 }   
