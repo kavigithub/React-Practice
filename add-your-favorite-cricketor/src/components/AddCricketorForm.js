@@ -1,24 +1,19 @@
 import React, {useState} from 'react';
 import Button from './Button';
 
-const AddCricketorForm = ({addNewCricketor, editCricketer}) => {
+const AddCricketorForm = ({addNewCricketor}) => {
   const [name, setName] = useState(""); 
   const [country, setCountry] = useState(1); 
   const [role, setRole] = useState(1);
   const [battingStyle, setBattingStyle] = useState(1);
   const [bowlingStyle, setBowlingStyle] = useState(1);
+  const [edit, setEdit] = useState(null);
 
-  const [isClicked, setIsClicked] = useState(null);
-
-  /* const [addCricketor, setAddCricketor] =  useState(initialData);
-  const addNewCricketor = (newCricketor) => {
-    setAddCricketor((prev) => [...prev, newCricketor]);
-  }*/
   
   const getFormDetails = (e) => {
     //whats with this 'e' here actually? How does it get here?
     //Ans: as soon as the submit event happens,  onSubmit={getFormDetails} React will call this submit event function. i.e getFormDetails, And when it does so,  it will pass into the function, the event object. So an object with all information about current event 
-    //  onSubmit={e => getFormDetails(e)}
+    //onSubmit={e => getFormDetails(e)}
     console.log(e);
     e.preventDefault();
 
@@ -28,6 +23,7 @@ const AddCricketorForm = ({addNewCricketor, editCricketer}) => {
 
     const newObj = { id, name, country, role, battingStyle, bowlingStyle}
     console.log(newObj) // for testing purposes only - remove
+
     addNewCricketor(newObj);
 
     setName('');
@@ -87,7 +83,7 @@ const AddCricketorForm = ({addNewCricketor, editCricketer}) => {
 
         <div className="mb-3 col-auto">
         <label className="form-label"></label>
-         <Button>Add Fav Cricketer</Button>  
+         <Button>{edit ? 'Edit Details' :'Add Fav Cricketer'}</Button>  
         </div>
     </form>
   )

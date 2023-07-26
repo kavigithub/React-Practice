@@ -4,14 +4,13 @@ import CricketorList from './components/CricketorList';
 import AddCricketorForm from './components/AddCricketorForm';
 import { useState } from 'react';
 import { initialData } from "./cricketor";
-import Search from './components/Search';
+import EditForm from './components/EditForm';
 
 
 function App() {
   const [addCricketor, setAddCricketor] =  useState(initialData);
-  const [selectedEdit, setSelectedEdit] = useState(addCricketor);
-  const [clickEdit, setClickEdit] = useState(false);
-  const [searchTxt, setSearchTxt] = useState('');  
+  const [selectedEdit, setSelectedEdit] = useState(null);
+  const [isEditSelected, setIsEditSelected] = useState(false);
 
   //Lift state up
   const handleNewCricketor = (newCricketor) => {
@@ -19,37 +18,26 @@ function App() {
   }
 
   const handleDeleteCricketor = (selected) => {
-    // console.log(selected);
     setAddCricketor((item) => item.filter((current) => current !== selected));
   }
 
 const handleEditCricketor = (selected) => {
-  handleDeleteCricketor(selected);
- // setAddCricketor((abcd) => abcd.map(abc =>  abc.id === selected.id ? {...abc, balance: abc.balance + value} : abc))
- setSelectedEdit((item) => item.filter((current) => current === selected))
+  console.log(selected);
+  setSelectedEdit(selected);
+  setIsEditSelected(true);
+  //handleDeleteCricketor(selected);
+/* setAddCricketor((items) => items.map((item) => item.id === selected.id ? {name: item.name, country: item.country, role: item.role, battingStyle: item.battingStyle, bowlingStyle: item.bowlingStyle} : item)) */
+setAddCricketor((items) => items.map((item) => item?.id === selected?.id ? {...item, name: item.name} : item)); 
+
 }
-
-/* const handleChange = e => {
-  setSearchTxt(e.target.value);
-};
-
-const filteredCricketer = () => {
-  setAddCricketor((items) => items.filter((item) => item.name.toLowerCase().includes(searchTxt.toLowerCase())))
-} */
 
   return (
     <div className="App">
         <h1 className='bg-primary text-white p-3 mb-4'>  🏏  Add Your Favourite Cricketer 🏏 </h1>
-      {/*   <div className='my-2'>
-            <Search filteredCricketer={filteredCricketer} handleChange={handleChange}></Search>
-        </div> */}
-        <div>
-          
-        </div>
         <div className="container text-center">
-        <CricketorList initialData={addCricketor} onDeleteCricketor={handleDeleteCricketor} clickEdit={clickEdit}></CricketorList>
+        <CricketorList initialData={addCricketor} onDeleteCricketor={handleDeleteCricketor} onEditCricketerInfo={handleEditCricketor}/>
         <hr></hr>
-        <AddCricketorForm addNewCricketor={handleNewCricketor} onEditCricketor={handleEditCricketor}></AddCricketorForm>
+        {isEditSelected ? <EditForm selectedEdit={selectedEdit} editCricketorDetails={handleEditCricketor} isEditDone={setIsEditSelected}/> : <AddCricketorForm addNewCricketor={handleNewCricketor} />}
         </div>
     </div>
   );

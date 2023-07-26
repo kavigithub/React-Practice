@@ -42,7 +42,7 @@ export const initialData = [
      {
         name: 'Ravichandran Ashwin',
         country: 'India',
-        role: 'Bowling Allrounder',
+        role: 'Bowling',
         battingStyle : 'Right Handed Bat',
         bowlingStyle : 'Right-arm offbreak',
         id: 128
