@@ -38,7 +38,7 @@ function App() {
           <FormAddPeople isVisibleAddForm={isVisibleAddForm} addPeopleList={addNewPeople}></FormAddPeople>
           <Button onClick={() => setIsVisibleAddForm(show => !show)}>{isVisibleAddForm ? 'Close' : 'Add People'}</Button>
       </div>
-         {selectedPeople && <FormSplitBill selectedPeople={selectedPeople} onSpitBillSubmit={handelSpitBill}/>}
+         {selectedPeople && <FormSplitBill selectedPeople={selectedPeople} onSpitBillSubmit={handelSpitBill} key={selectedPeople.id}/>}
     </div>
   );
 }
