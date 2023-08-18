@@ -10,51 +10,26 @@ import WatchedMovieList from "./components/WatchedMovieList";
 import Loader from "./utils/Loader";
 import Error from "./utils/Error";
 import MovieDetails from "./components/MovieDetails";
+import { useMovies } from "./hooks/useMovies";
+import { useLocalStorageState } from "./hooks/useLocalStorageState";
 
 const APIKEY = "16d609ca";
 
 export default function App() {
   const [query, setQuery] = useState("interstellar");
-  const [movies, setMovies] = useState();
-  const [watched, setWatched] = useState([]);
-  const [movieRating, setMovieRating] = useState(0);
-  const [isLoading, setIsLoading] = useState(false);
-  const [errorMsg, setErrorMsg] = useState("");
+
   const [selectedId, setSelectedId] = useState(null);
-  
-  const callMovieData = async () => {
-    try {
-      setIsLoading(true);
-      setErrorMsg(""); //always before we start for the fetching data reset the error
-      const res = await fetch(
-        `http://www.omdbapi.com/?s=${query}&apikey=${APIKEY}`
-      );
 
-      //A quick note: Network error is handled differently. In that case you won't get your own user defined error.
+  const { movies, isLoading, errorMsg } = useMovies(query);
 
-      if (!res || !res.ok)
-        throw new Error("Something went wrong during fetching");
+  const [watched, setWatched] = useLocalStorageState([], "watched");
 
-      const data = await res.json();
-      if (data.Response === "False") throw new Error("Movie not found");
-
-      setMovies(data.Search);
-    } catch (error) {
-      setErrorMsg(error.message);
-    } finally {
-      setIsLoading(false);
-    }
-
-    if (query.length < 3) {
-      setMovies([]);
-      setErrorMsg("");
-      return;
-    }
-  };
+  //never do this...never used like this..here we are calling function... not passing function in.
+  //const [watched, setWatched] = useState(localStorage.getItem('watched'));
 
   const handelSelectedMovie = (id) => {
     // setSelectedId(id)
-    setSelectedId((selectedId) => selectedId === id ? null : id); //when u click on the same id will give u null
+    setSelectedId((selectedId) => (selectedId === id ? null : id)); //when u click on the same id will give u null
   };
 
   const handleCLosedMovie = () => {
@@ -63,15 +38,15 @@ export default function App() {
 
   const handelAddWatchedMovie = (movie) => {
     setWatched((newWatchedMovie) => [...newWatchedMovie, movie]);
+    //another option is add in use effect
+    //  localStorage.setItem('watched', JSON.stringify([...watched, movie]))
   };
 
   const handelDeleteWatched = (movieId) => {
-    setWatched((deleteMovie) => deleteMovie.filter((item) => item.imdbID !== movieId))
-  }
-
-  useEffect(() => {
-    callMovieData();
-  }, [query]);
+    setWatched((deleteMovie) =>
+      deleteMovie.filter((item) => item.imdbID !== movieId)
+    );
+  };
 
   return (
     <>
@@ -92,10 +67,10 @@ export default function App() {
         </Box>
 
         <Box>
-          {selectedId ? (
+          {selectedId && query ? (
             <MovieDetails
               selectedId={selectedId}
-              onClosedMovie={handleCLosedMovie}
+              /* onClosedMovie={handleCLosedMovie} */
               APIKEY={APIKEY}
               onAddWatched={handelAddWatchedMovie}
               watched={watched}
@@ -103,7 +78,10 @@ export default function App() {
           ) : (
             <>
               <WatchedSummary watched={watched} />
-              <WatchedMovieList watched={watched} deleteWachedMovie={handelDeleteWatched}/>
+              <WatchedMovieList
+                watched={watched}
+                deleteWachedMovie={handelDeleteWatched}
+              />
             </>
           )}
         </Box>

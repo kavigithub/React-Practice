@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import StarRating from './StarRating';
 import Loader from "../utils/Loader";
+import {useKey} from "../hooks/useKey";
 
 const MovieDetails = ({ selectedId, onClosedMovie, APIKEY, onAddWatched, watched}) => {
   const [movie, setMovie] = useState({});
@@ -8,7 +9,7 @@ const MovieDetails = ({ selectedId, onClosedMovie, APIKEY, onAddWatched, watched
   const [userRating, setUserRating] = useState('');
 
   const isWatched = watched.map((movie) => movie.imdbID).includes(selectedId);
-  console.log(isWatched, 'isWatched');
+  //console.log(isWatched, 'isWatched');
 
   const watchedUserRating = watched.find(movie => movie.imdbID === selectedId)?.userRating;
 
@@ -40,6 +41,22 @@ const MovieDetails = ({ selectedId, onClosedMovie, APIKEY, onAddWatched, watched
     onAddWatched(newWatchedMovie);
     onClosedMovie();
   }
+
+  //create custum hook
+  useKey('Escape', onClosedMovie);
+ /*  useEffect(() => {
+    const callBack = (e) => {
+        if(e.code === 'Escape'){
+          onClosedMovie();
+          console.log('closing');
+        }
+    }
+    document.addEventListener('keydown', callBack);
+
+    return function(){
+        document.removeEventListener('keydown', callBack);
+    } 
+  }, [onClosedMovie]); */
   
   useEffect(() => {
     const getMovieDetails = async () => {
@@ -54,11 +71,23 @@ const MovieDetails = ({ selectedId, onClosedMovie, APIKEY, onAddWatched, watched
     getMovieDetails();
   }, [APIKEY, selectedId]);
 
+  useEffect(() => {
+    if(!title) return;
+    document.title = `Movie : ${title}`;
+
+    //cleanup function
+    return function(){
+      document.title = 'Popcorn App';
+      console.log(`Clean up effect for movie ${title}`)
+    }
+  }, [title])
+
   return (
     <div className="details">
     { isLoading ? <Loader /> : (
       <>
         <header>
+       
           <button className="btn-back" onClick={onClosedMovie}>
             &larr;
           </button>
