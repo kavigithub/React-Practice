@@ -23,10 +23,15 @@ function App() {
 
   const handelSpitBill = (value) => {
     console.log(value);
+    console.log(selectedPeople);
     //setSelectedPeople(selectedPeople.balance = value);
-    setPeopleList((abcd) => abcd.map(abc =>  abc.id === selectedPeople.id ? {...abc, balance: abc.balance + value} : abc))
-
-    setSelectedPeople(null);
+   //setPeopleList((abcd) => abcd.map(abc =>  abc.id === selectedPeople.id ? {...abc, balance: abc.balance + value} : abc))
+   selectedPeople.balance = selectedPeople.balance + value;
+   setSelectedPeople({
+     ...selectedPeople,
+     balance: selectedPeople.balance,
+   });
+   // setSelectedPeople(null);
   }
 
 

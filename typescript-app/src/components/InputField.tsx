@@ -1,13 +1,13 @@
 import React, { useRef } from "react";
 import "../components/style.css";
 
-interface interfaceToto {
+interface InterfaceToto {
   todo: string;
   setTodo:  React.Dispatch<React.SetStateAction<string>>;
   handelAddTodo: (e: React.FormEvent) => void;  
 }
 
-const InputField = ({todo, setTodo, handelAddTodo} : interfaceToto) => {
+const InputField = ({todo, setTodo, handelAddTodo} : InterfaceToto) => {
   const inputElement = useRef<HTMLInputElement>(null)
   return (
     <form
