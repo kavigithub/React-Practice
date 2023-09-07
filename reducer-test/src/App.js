@@ -1,6 +1,9 @@
 import { useReducer, useState} from 'react';
 import './App.css';
 import BankAc from './BankAc';
+import TodoState from './TodoState';
+import UpdateObjState from './UpdateObjState';
+import ListArrayTodoList from './ListArrayTodoList';
 
 
 function reducer(state, action) {
@@ -52,6 +55,15 @@ function App() {
 
       <hr></hr>
       <BankAc></BankAc>
+
+      <hr></hr>
+      <TodoState></TodoState>
+
+      <hr></hr>
+      <UpdateObjState></UpdateObjState>
+
+      <hr></hr>
+      <ListArrayTodoList></ListArrayTodoList>
     </div>
   );
 }
