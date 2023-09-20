@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+         const songsList = [
+        { name: "aaaaaa..", artist: "A" },
+        { name: "cccccccc..", artist: "B" },
+        { name: "abababa..", artist: "C" },
+        { name: "dddddd..", artist: "A" },
+        { name: "eeeeee..", artist: "A" },
+        { name: "ffffff..", artist: "B" },
+        { name: "ggggg..", artist: "A" },
+      ];
+
+      function songCount(param) {
+        let obj = {};
+        param.forEach(element => {
+            //console.log(element.artist);
+            obj[element.artist] = obj[element.artist] ? obj[element.artist] + 1 : 1;
+            console.log( obj[element.artist] = obj[element.artist] ? obj[element.artist] + 1 : 1);
+        });
+        console.log(obj);
+        return obj
+      }
+      songCount(songsList);
+
+      const arraJson = [
+        {
+          name: "a",
+          department: "a",
+        },
+        {
+          name: "b",
+          department: "a",
+        },
+        {
+          name: "c",
+          department: "b",
+        },
+      ];
+
+      function departmentWiseSeperation(param) {
+        console.log(param);
+        //let arr = []
+        //let obj = {}
+       /*  param.forEach(item => {
+            ///onsole.log(item);
+            let newObj = {
+                department: item.department,
+                employess: []
+            };
+            console.log(newObj);
+        }); */
+       /*  let newObj = param.reduce((previousVal, currentVal) => {
+            console.log(currentVal);
+        }, 0); */
+       let newObj = param.reduce((prevVal, {name, department}) => {
+            console.log(name, department) ;   
+           
+            prevVal.push({department, employee:[name]})
+       }, [])
+        //return obj;
+      }
+
+      departmentWiseSeperation(arraJson);
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+            let arr = [10, 324, 45, 90, 9808];
+            let getMaxFromList = Math.max(...arr);
+            console.log(getMaxFromList);
+
+            function maxNumber(param){
+                let getNew = arr.reduce((prevVal, currentVal) => {
+                    return prevVal <= currentVal && currentVal
+                }, 0);
+                console.log(getNew); 
+            }
+            maxNumber(...arr);
+    </script>
+</body>
+</html>

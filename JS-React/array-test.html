@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+        const people = [
+  {
+    firstName: 'John',
+    lastName: 'Doe',
+    email: 'john@gmail.com',
+    phone: '111-111-1111',
+    age: 30,
+  },
+  {
+    firstName: 'Jane',
+    lastName: 'Poe',
+    email: 'jane@gmail.com',
+    phone: '222-222-2222',
+    age: 25,
+  },
+  {
+    firstName: 'Bob',
+    lastName: 'Foe',
+    email: 'bob@gmail.com',
+    phone: '333-333-3333',
+    age: 45,
+  },
+  {
+    firstName: 'Sara',
+    lastName: 'Soe',
+    email: 'Sara@gmail.com',
+    phone: '444-444-4444',
+    age: 19,
+  },
+  {
+    firstName: 'Jose',
+    lastName: 'Koe',
+    email: 'jose@gmail.com',
+    phone: '555-555-5555',
+    age: 23,
+  },
+];
+
+  let youngPeople = people.filter((item) => {
+     if(item.age <= 25) {
+        return item;
+     }
+  }).map((item) => ({
+        name: item.firstName + ' ' + item.lastName,
+        email: item.email
+     }));
+  console.log('young People:', youngPeople);
+
+/*secon challenge*/
+const numbers = [2, -30, 50, 20, -12, -9, 7];
+
+const positiveNumber = numbers.reduce((previousVal, currentVal) => {
+    if( parseInt(currentVal)  > 0) {
+        console.log(currentVal);
+        return previousVal + parseInt(currentVal) 
+    }
+}, 0);
+    console.log(positiveNumber);
+
+/*third challenge*/
+const words = ['world', 'programe', 'javascript'];
+const capitaliseArray = words.map((item) => {
+    console.log(item.charAt(0).toUpperCase(), item.substring(1));
+    console.log(item[0].toUpperCase(), item.slice(1)) ;
+    return (item[0].toUpperCase() + item.slice(1));   //this is a way to do it in one line of code
+});
+console.log(capitaliseArray);
+
+
+
+    </script>  
+</body>
+</html>
