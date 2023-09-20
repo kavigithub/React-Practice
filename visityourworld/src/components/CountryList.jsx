@@ -40,7 +40,7 @@ let countries = cities.reduce((prevVal, currentVal) => {
     <>
       <ul className={styles.countryList}>
         {countries.map((item) => (
-          <CountryItem country={item} key={item.emoji}/>
+          <CountryItem country={item} key={item.country}/>
         ))}
       </ul>
     </>

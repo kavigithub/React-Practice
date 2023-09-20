@@ -3,7 +3,7 @@ import Sidebar from '../components/Sidebar';
 import styles from '../components/Sidebar.module.css';
 const AppLayout = () => {
   return (
-    <div className={styles.app}>
+    <div className={styles.app} style={{display:'flex'}}>
       <Sidebar></Sidebar>
       <MapBox></MapBox>
     </div>
