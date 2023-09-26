@@ -8,7 +8,7 @@ function getInputVal() {
     let shoppingTxt = inputVal.value; 
     let createDiv = document.createElement('p');
     createDiv.classList.add("shopping-item");
-    createDiv.innerHTML=`${shoppingTxt} <button class="delete">X</button>`;
+    createDiv.innerHTML=`${shoppingTxt} <button class="edit">Edit</button> <button class="delete">X</button>`;
     listSection.append(createDiv);
     inputVal.value = '';
 }
@@ -52,6 +52,20 @@ document.addEventListener("click", function(e){
         listSection.removeChild(parentNode);
     }
   });
+
+document.addEventListener('click', function(e) {
+    const target = e.target;
+    const hasClass = target.classList.contains('edit');
+    if(hasClass){
+        let parentNode = target.parentNode;
+        target.innerHTML = 'Save';
+        let createInput = document.createElement('input');
+        createInput.value = parentNode.firstChild.textContent;
+        parentNode.prepend(createInput);
+        console.log(createInput.nextSibling = '');
+       /*  createInput.nextSibling.style.display = 'none'; */
+    }
+})  
 
 
 

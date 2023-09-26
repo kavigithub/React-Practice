@@ -4,6 +4,8 @@ import BankAc from './BankAc';
 import TodoState from './TodoState';
 import UpdateObjState from './UpdateObjState';
 import ListArrayTodoList from './ListArrayTodoList';
+import CompTest from './CompTest';
+import Heading from './Heading';
 
 
 function reducer(state, action) {
@@ -64,6 +66,26 @@ function App() {
 
       <hr></hr>
       <ListArrayTodoList></ListArrayTodoList>
+
+      <hr></hr>
+      {/* <CompTest level={1}> */}
+      <CompTest> 
+          <Heading>Heading 1</Heading>
+          <CompTest>
+            <Heading>Heading 2</Heading>
+            <Heading>Heading 2</Heading>
+            <Heading>Heading 2</Heading>
+
+            <CompTest>
+              <Heading>Sub-heading 3</Heading>
+              <Heading>Sub-heading 3</Heading>
+              <Heading>Sub-heading 3</Heading>
+            </CompTest>
+
+          </CompTest>
+      </CompTest>
+
+
     </div>
   );
 }

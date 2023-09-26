@@ -21,6 +21,7 @@ function App() {
 
   return (
     <div className="App">
+        <a href='https://www.youtube.com/watch?v=FJDVKeh7RJI&t=2121s' target='blank'>https://www.youtube.com/watch?v=FJDVKeh7RJI&t=2121s</a>
         <Greet name="React" messageCount={20} isLogged={true}></Greet>
         <h1>Taskify</h1>
         <InputField todo={todo} setTodo={setTodo} handelAddTodo={handelAddTodo}></InputField>
