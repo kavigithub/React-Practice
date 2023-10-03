@@ -41,6 +41,23 @@
       }
       getUserWithPromise();
 
+      //Javacscript is single threaded language  
+      //it runs line by line 
+      //An asynchronous operation is an action that takes time to produce some result. 
+      //This could be fetching data over a network for example.
+
+       //What is Promises
+        // Promises are used to handle asynchronous operations in JavaScript.
+        // where callbacks can create callback hell leading to unmanageable code
+       
+
+      //The JavaScript runtime environment provides the ability to execute code asynchronously in parallel with other tasks. This allows us to perform multiple operations at the same time without
+      /*
+      The browser has two threads: the main thread where JavaScript code executes; and the event loop thread where events are processed such as mouse clicks or key p
+      Asynchronous operations are handled in JavaScript using callbacks or promises. Callbacks allow you to specify code to run when the results of an asynchronous call have been
+      const getUsers = Promise.all([getUser(),getPosts()]);
+      */
+
       ///what is async await
         //async is key word which is used when we have function which take some time to perform
         //u have to used await inside async to handle promises
@@ -49,14 +66,52 @@
         //async and await are used to handle Promise
         //explain how function execution suspended till promise resolve and once it resolve it will resume from where it suspended
 
-      //What is Promises
-        // Promises are used to handle asynchronous operations in JavaScript.
-        // where callbacks can create callback hell leading to unmanageable code
-       
+      //The async keyword is used to declare an asynchronous function that will return a promise.
+      // Inside which we will use await keyword which will asynchronously wait for the complete
+      // resolution and rejection of the returned promise.
+
+     
 
       //HOw fetch works
         //The fetch() method in JavaScript is used to request data from a server. fetch retuns a promise
         //fetch returns response ...then we need to convert this resonse body into .json
+
+      
+
+      //sometimes some JS operations will take time to complete task or operations such as network requests and file operations calling 2-4 functions which is depended on each other
+      //for that we used callback functionality to handle asynchronous operations and event handling.
+      //Because of the callback hell and Inversion of control(IOC) problem, 
+      // we use Promises to handle asynchronous tasks in JavaScript and make our application scalable.
+      //.then().json.catch().finally()...send in error handling and overall increases the reliability of our code.
+      //please read above statement
+      //With async and await you can write promises in a much cleaner way.
+      //IMP
+      //The most important difference between .then and async await is that
+      // an async function will pause the function execution until the promise finishes. 
+      //When using .then the rest of the function will execute while the promise finishes.
+
+      //Modules in JavaScript: import and export
+
+      //Closure in JavaScript
+/* Closure is the feature of JavaScript that allows an inner function to have access to its 
+current scope as well as its lexical parent scope. It is a very fundamental, basic yet important concept of JavaScript.
+ The closure has the property of encapsulation, code organization, and memorization of its lexical parent scope. 
+ In react.js privacy can be achieved using closures, by creating encapsulated logic inside components.
+
+Example:
+
+
+function start() {
+  var content = "GeeksforGeeks"; // content is a local variable created by start()
+  function company() {
+    // company() is the inner function, that forms the closure
+    console.log(content); // using variable declared in the parent function
+  }
+  company();
+}
+start(); */
+
+//for ref : https://www.geeksforgeeks.org/top-javascript-concepts-to-know-before-learning-react/
     </script>
   </body>
 </html>

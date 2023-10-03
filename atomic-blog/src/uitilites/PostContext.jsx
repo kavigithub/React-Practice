@@ -26,16 +26,16 @@ const PostProvider = ({ children }) => {
   function handleClearPosts() {
     setPosts([]);
   }
+
+  const providerValue = {
+    posts: searchedPosts,
+    onAddPost: handleAddPost,
+    onClearPosts: handleClearPosts,
+    searchQuery,
+    setSearchQuery,
+  }
   return (
-    <PostContext.Provider
-      value={{
-        posts: searchedPosts,
-        onAddPost: handleAddPost,
-        onClearPosts: handleClearPosts,
-        searchQuery,
-        setSearchQuery,
-      }}
-    >
+    <PostContext.Provider value={providerValue}>
       {children}
     </PostContext.Provider>
   );

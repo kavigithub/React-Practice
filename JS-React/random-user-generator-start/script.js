@@ -6,8 +6,8 @@ function loadRadomUser() {
    try {
         spinner.classList.remove("hidden");
         fetch(apiURL).then((response) =>  response.json()).then((data) => {
-            spinner.classList.add('hidden');
             displayUser(data);
+            spinner.classList.add('hidden');
         });
    } catch (error) {
     throw new Error('data now found');
