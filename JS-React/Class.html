@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+        class Shape{
+            constructor(name){
+                this.name = name;
+            }
+
+            logName(){
+                console.log(`Shape Name : ${this.name}`)
+            }
+        }
+
+        class Retangualr extends Shape {
+            constructor(name, width, height){
+                //super calss the constructor function of parent class i.e Shape
+                super(name);
+                this.width = width;
+                this.height = height;
+            }
+        }
+
+        class Circle extends Shape {
+            constructor(name, radius) {
+                super(name)
+                this.radius = radius
+            }
+
+            //example og Pollymorphisum
+            logName(){
+                console.log('Circle Name', this.name);
+            }
+        }
+
+        const rec1 = new Retangualr('Reactangular', 20, 20);
+        console.log(rec1);
+        rec1.logName();
+
+        const circle1 = new Circle('Circle', 100);
+        circle1.logName();
+    </script>
+</body>
+</html>

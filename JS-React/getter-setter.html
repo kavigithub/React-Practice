@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+       let person = {
+        _name: 'John',
+        get name() {
+            return this._name;
+        },
+        set name(value) {
+            this._name = value;
+        }
+        };
+
+        console.log(person);
+        person.name = 'Isvaku';
+        console.log(person);
+
+       class Animal{
+            constructor(country, species){
+                this._country = country;
+                this.species = species
+            }
+
+          get country(){
+                return this.contryNameSetUp(this._country);
+                //return `My Name is ${this._country.charAt(0).toUpperCase() + this._country.slice(1)}` // private property
+            }
+
+            set country(value){
+                //this._country = value.charAt(0).toUpperCase() + value.slice(1);
+                this._country = this.contryNameSetUp(value)
+            }
+
+            contryNameSetUp(value){
+                return value.charAt(0).toUpperCase() + value.slice(1);
+            }
+        }
+
+        let spurred = new Animal('africa', 'tortoise');
+        console.log(spurred.country);
+        spurred.country = "asia"
+        console.log(spurred);
+    </script>
+</body>
+</html>

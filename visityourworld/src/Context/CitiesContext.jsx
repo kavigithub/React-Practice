@@ -47,6 +47,7 @@ const CitiesProvider = ({children}) => {
         cities,
         isLoading,
         currentCity,
+        setIsLoading,
         getCity
     }}>
         {children}

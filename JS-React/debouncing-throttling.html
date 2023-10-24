@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p class="count-track"></p>
+    <p></p>
+    <button id="callMe">Click</button>
+
+    <script>
+        let count = 1;
+        
+       
+        let x = setTimeout(() => {
+            document.getElementById("callMe").addEventListener('click', function(){
+              document.querySelector('.count-track').innerHTML = `Button Pressed ${count++} times`
+            });
+        }, 800);
+    </script>
+</body>
+</html>

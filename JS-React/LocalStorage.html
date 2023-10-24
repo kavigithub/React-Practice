@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form id="register">
+        <input type = "text" id ="name" placeholder="name" />
+        <input type="email" id="email" placeholder="email" />
+        <button type="submit">Submit</button>
+    </form>
+
+    <div id="showRegisterMailID">
+       
+    </div>
+
+    <script>
+          /* let newArray = [];
+          let showResult = document.getElementById('showRegisterMailID');
+          let itemsArray = localStorage.getItem('registerUser') ? JSON.parse(localStorage.getItem('registerUser')) : [];
+
+        document.querySelector("#register").addEventListener("submit", function(e){
+            e.preventDefault();
+            let name = document.getElementById('name');  //get the value of input field with id='name'
+            let email = document.getElementById('email');
+            if(name.value === "" || email.value === ""){
+                alert('please fill the all fileds of form');
+                return;
+            } else {
+                let obj = {
+                    name: name.value,
+                    email: email.value
+                };
+                newArray.push(JSON.stringify(obj));
+               
+                localStorage.setItem('registerUser', newArray);
+                addTask(obj)
+            }
+
+            name.value = "";
+            email.value = "";
+        })
+
+        if(itemsArray.length > 0){
+            itemsArray.forEach(addTask);
+        }
+        function addTask(element){
+            const li = document.createElement('li')
+            li.textContent = `name: ${element.name} | email: ${element.email}`;;
+            showResult.appendChild(li);
+        } */
+
+        let registeredArrayList = [];
+        let showResult = document.getElementById('showRegisterMailID');
+        //let itemsArray = localStorage.getItem('registerUser') ? JSON.parse(localStorage.getItem('registerUser')) : [];
+
+        document.getElementById("register").addEventListener("submit", function(e){
+            e.preventDefault();
+            let name=document.getElementById('name');
+            let mailid=document.getElementById('email');
+
+            if(name.value === "" || mailid.value === "") {
+                alert('Please Fill All Fields!');
+                return
+            } else {
+                getRegisteredUser();
+
+                let obj = {
+                    name: name.value,
+                    email: mailid.value
+                }
+                registeredArrayList.push(JSON.stringify(obj));
+
+                localStorage.setItem("registerUser", registeredArrayList);
+
+                displayRegisterUser(obj);
+            }
+
+            name.value = "";
+            email.value = "";
+
+        });
+
+      
+            
+        function displayRegisterUser(obj){
+            let p = document.createElement('p');
+            p.textContent = `name: ${obj.name} | email: ${obj.email}`;
+            showResult.appendChild(p)
+        }
+
+       function getRegisteredUser(){
+            let user;
+            if(localStorage.getItem('registerUser') === null){
+                user = [];
+            } else {
+                user = JSON.parse(localStorage.getItem('registerUser'));
+            }
+
+            if(user.length > 0){
+                user.forEach(displayRegisterUser)
+             }
+
+            return user;
+         }
+
+     
+    </script>
+</body>
+</html>

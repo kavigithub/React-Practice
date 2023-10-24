@@ -6,6 +6,15 @@ const API_URL = "https://api.themoviedb.org/3/";
 
 const global = {
   currentLocation: window.location.pathname,
+  search: {
+    term: '',
+    type: '',
+    pagination: 1,
+    totalPages: 1,
+    page: 1,
+    total_pages: 0,
+    total_results: 0
+  }
 };
 
 const page = global.currentLocation;
@@ -24,7 +33,8 @@ function highlightLink() {
 
 const endPoints = {
   popularMovies: "movie/popular",
-  popularTVshow: "tv/popular"
+  popularTVshow: "tv/popular",
+  nowPlaying: "movie/now_playing"
 };
 
 //fetch data from TMDB API
@@ -44,6 +54,30 @@ async function fetchAPIdata(endpoints) {
     spinner.classList.add('show');
     const response = await fetch(`${API_URL}${endpoints}`, options);
     const data = await response.json();
+    spinner.classList.remove('show');
+    return data;
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+//Make serach API call
+async function searchAPIdata(){
+  const options = {
+    method: "GET",
+    headers: {
+      accept: "application/json",
+      Authorization:
+        "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjNmY1MzgyODdlMTYwNDY2ZWU4ODI5MWNlYTM2ZTk4NCIsInN1YiI6IjY1MTQ0MjRjMDQ5OWYyMDBjNDRlNGVmMSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.WxdgP0yD83QLWFz_b9LyYWYqlenjajGu3oMyj2rBvrg",
+    },
+  };
+
+  try {
+    spinner.classList.add('show');                  
+    /* search/tv?query=Gran%20Turismo&include_adult=false&language=en-US&page=1 */
+    const response = await fetch(`${API_URL}search/${global.search.type}?query=${global.search.term}&language=en-US&page=${global.search.page}`, options);
+    const data = await response.json();
+    console.log(data);
     spinner.classList.remove('show');
     return data;
   } catch (error) {
@@ -229,9 +263,176 @@ function tvShowDetailHtml(tvShow){
   return htmlDiv;
 }
 
+//Search moview and TV
+async function serach(){
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  console.log(queryString);
+  console.log(urlParams);
+  console.log(urlParams.get('type'));
+
+  global.search.type = urlParams.get('type');
+  global.search.term = urlParams.get('search-term');
+
+
+  if(global.search.term !== '' && global.search.term !== null) {
+    const { results, total_pages, page, total_results } = await searchAPIdata();
+    console.log(results);
+    if(results.length === 0){
+      showAlert('No results found', 'alert-error')
+      return;
+    }
+      global.search.page = page;
+      global.search.total_pages= total_pages;
+      global.search.total_results = total_results;
+
+    displaySearchResults(results);
+
+  } else {
+   // alert('please enter')
+   showAlert('Please enter a serach term', 'alert-error')
+  }
+}
+
+function displaySearchResults(results){
+  document.querySelector("#search-results").innerHTML = "";
+  document.querySelector("#pagination").innerHTML = "";
+
+  results.forEach((result) => {
+    let div = document.createElement("div");
+    div.classList.add("card");
+    div.innerHTML = `
+    <a href="${global.search.type}-details.html?id=${result.id}">
+    ${
+      result.poster_path
+        ? `<img src="https://image.tmdb.org/t/p/w500${result.poster_path}" class="card-img-top" alt=${global.search.type === 'movie' ? result.title : result.name}/>`
+        : `<img src="../images/no-image.jpg" class="card-img-top" alt=${global.search.type === 'movie' ? result.title : result.name} />`
+    }
+    </a>
+    <div class="card-body">
+      <h5 class="card-title">${global.search.type === 'movie' ? result.title : result.name}</h5>
+      <p class="card-text">
+        <small class="text-muted">Release: ${global.search.type === 'movie' ? result.release_date : result.first_air_date}</small>
+      </p>
+    </div>
+  `;
+  document.getElementById("search-results-heading").innerHTML = `<h2>${results.length} of ${global.search.total_results}, Results for ${global.search.term}</h2>`
+
+    document.getElementById("search-results").appendChild(div);
+  });
+  displayPaginationHMTL();
+}
+
+function displayPaginationHMTL(){
+  let div = document.createElement('div');
+  div.classList.add("pagination");
+  div.innerHTML = ` <button class="btn btn-primary" id="prev">Prev</button>
+  <button class="btn btn-primary" id="next">Next</button>
+  <div class="page-counter">Page ${global.search.page} of ${global.search.total_pages}</div>`;
+  document.querySelector("#pagination").appendChild(div);
+
+  if(global.search.page === 1){
+    document.querySelector('#prev').disabled = true;
+  }
+
+  if(global.search.total_pages === global.search.page){
+    document.querySelector('#next').disabled = true;
+  }
+
+  document.querySelector('#next').addEventListener('click', async function(){
+    global.search.page++;
+    const { results, total_pages, page, total_results } = await searchAPIdata();
+    displaySearchResults(results);
+    //console.log(results++);
+  });
+
+  document.querySelector("#prev").addEventListener("click", async function(){
+    global.search.page--;
+    const { results, total_pages, page, total_results } = await searchAPIdata();
+    displaySearchResults(results);
+  })
+}
+
+async function displaySlider(){
+  try {
+    let {results} = await fetchAPIdata(endPoints.nowPlaying);
+    results.forEach((item) => {
+      let div = document.createElement('div');
+      div.classList.add('swipper-slide');
+      div.innerHTML = sliderHTML(item);
+      document.querySelector('.swiper-wrapper').appendChild(div);
+      initSwipper(); 
+    });  
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+function sliderHTML(param){
+  let htmlSlider = `
+  <a href="movie-details.html?id=${param.id}">
+    <img  src="https://image.tmdb.org/t/p/w500${param.poster_path}" alt=${param.title} />
+  </a>
+  <h4 class="swiper-rating">
+    <i class="fas fa-star text-secondary"></i> ${param.vote_average} / 10
+  </h4>`;
+  return htmlSlider;
+}
+
+function initSwipper(){
+  const swiper = new Swiper('.swiper', {
+    // Default parameters
+    slidesPerView: 1,
+    spaceBetween: 30,
+    freeMode: true,
+    loop: true,
+      // Navigation arrows
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+
+    // And if we need scrollbar
+    scrollbar: {
+      el: '.swiper-scrollbar',
+    },
+    autoPlay: {
+      delay: 4000,
+      disbaleOnInteraction: false
+    },
+    // Responsive breakpoints
+    breakpoints: {
+      // when window width is >= 320px
+      500: {
+        slidesPerView: 2,
+      },
+      // when window width is >= 480px
+      700: {
+        slidesPerView: 3
+      },
+      // when window width is >= 640px
+      1200: {
+        slidesPerView: 4,
+      }
+    }
+  })
+  return swiper;
+}
+
 function addCommasToNumbes(number){
   return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   //return number.toLocaleString("en-US");
+}
+
+function showAlert(message, className){
+  const alertElement = document.createElement('div');
+  alertElement.classList.add('alert', className);
+  alertElement.appendChild(document.createTextNode(message));
+  document.getElementById('alert').appendChild(alertElement);
+
+  setTimeout(() => {
+    alertElement.remove();
+  }, 3000)
 }
 
 function init() {
@@ -256,6 +457,7 @@ function init() {
   if (page.includes("index") || page.endsWith("/")) {
     //console.log('home')
     displayPopularMovies();
+    displaySlider();
   } else if (page.includes("shows")) {
     console.log("shows");
     displayPopularTvShow();
@@ -266,6 +468,7 @@ function init() {
     console.log("tv details");
     getTVDetails()
   } else if (page.includes("search")) {
+    serach();
     console.log("search");
   }
 

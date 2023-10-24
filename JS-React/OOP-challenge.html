@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function Player(name, level = 1, points = 0){
+            this.name = name;
+            this.level = level;
+            this.points = points;
+        }
+
+        Player.prototype.gainXP = function(number){
+           let getPoints = this.points + number
+           console.log(this.points, 'points', number);
+
+           if(this.points >= 10){
+              this.level += 1;
+              this.points -= 10;
+           }
+
+           return getPoints;
+        }
+
+        Player.prototype.describe = function(){
+            return `Player ${this.name} is on Level: ${this.level}. With Points: ${this.points}`;
+        }
+       
+        let playerA = new Player('Kavita', 1, 30);
+        console.log(playerA.gainXP(5));
+        console.log(playerA.points);
+        console.log(playerA.level);
+        console.log(playerA.describe());
+
+        let playerB = new Player('Kueow', 1, 8);
+        console.log(playerB.gainXP(20));
+        console.log(playerB.points);
+        console.log(playerB.level);
+        console.log(playerB.describe());
+    </script>
+</body>
+</html>

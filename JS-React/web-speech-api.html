@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Web Browser API: Web Speech API</h1>
+    <p>The Web Speech API enables you to incorporate voice data into web apps. The Web Speech API has two parts: SpeechSynthesis (Text-to-Speech), and SpeechRecognition (Asynchronous Speech Recognition.)</p>
+    <h4>SpeechRecognition (Asynchronous Speech Recognition.)</h4>
+    <p>Speech to text: if we talk into micophone, our application take that text and do something with it</p>
+    <hr>
+   <h4> SpeechSynthesis (Text-to-Speech)</h4>
+   <p>is text to speech: if you want type something in a box and have to read in certain voice or whatever</p>
+   <hr>
+   <h4>Uses</h4>
+   <p>for non-verbal people</p>
+
+
+    <script>
+        const SpeechSynthesis = window.speechRecognition || window.webkitSpeechRecognition;
+        const reac = new SpeechSynthesis();
+        reac.lang = "en-US";
+        reac.continuous = true;
+
+        reac.onresult = function(e){
+            let acceptedColors = ['red', 'orange', 'green', 'black', 'brown', 'yellow', 'pink'];
+            /* console.log(e.results[0][0].transcript, e.resultIndex); */
+            for(let i = e.resultIndex; i < e.results.length; i++){
+                const script = e.results[i][0].transcript.toLowerCase().trim();
+                console.log(script);
+                if(acceptedColors.includes(script)){
+                    document.body.style.backgroundColor = script;
+                } else {
+                    alert('please say a color')
+                }
+               
+            }
+        }
+
+        reac.start();
+    </script>
+</body>
+</html>
