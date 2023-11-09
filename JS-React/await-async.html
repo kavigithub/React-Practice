@@ -69,14 +69,15 @@
       //The async keyword is used to declare an asynchronous function that will return a promise.
       // Inside which we will use await keyword which will asynchronously wait for the complete
       // resolution and rejection of the returned promise.
+      
+      //You could be racking your brain wondering what the difference between synchronous and asynchronous means. Simply put, synchronous means that jobs are completed one after the other. Asynchronous means that tasks are completed independently.
 
      
 
       //HOw fetch works
         //The fetch() method in JavaScript is used to request data from a server. fetch retuns a promise
         //fetch returns response ...then we need to convert this resonse body into .json
-
-      
+        //The fetch API, as the name implies, is used to get data from APIs. It is a browser API that allows you to use JavaScript to make basic AJAX (Asynchronous JavaScript and XML) requests.
 
       //sometimes some JS operations will take time to complete task or operations such as network requests and file operations calling 2-4 functions which is depended on each other
       //for that we used callback functionality to handle asynchronous operations and event handling.
@@ -112,6 +113,18 @@ function start() {
 start(); */
 
 //for ref : https://www.geeksforgeeks.org/top-javascript-concepts-to-know-before-learning-react/
+
+const fetchData = async () => {
+  try {
+    const quotes = await fetch("https://type.fit/api/quotes");
+    const response = await quotes.json();
+    console.log(response);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+fetchData();
     </script>
   </body>
 </html>

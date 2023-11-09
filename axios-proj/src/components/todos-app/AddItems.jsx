@@ -1,11 +1,19 @@
 import React, { useState } from 'react'
 
-const AddItems = ({addTodo, todoInput, addTodosTxt}) => {
+const AddItems = ({addTodo}) => {
+  const[todoInput, setTodoInput] = useState('');
+
+  function handdleSubmit(e){
+    e.preventDefault();
+    if(todoInput === "") return;
+    addTodo(todoInput);
+    setTodoInput("");
+  }
  
   return (
     <div>
-        <input value={todoInput} onChange={(e) => addTodosTxt(e.target.value)} />
-        <button onClick={addTodo}>Add Item</button>
+        <input value={todoInput} onChange={(e) => setTodoInput(e.target.value)} />
+        <button onClick={handdleSubmit}>Add Item</button>
     </div>
   )
 }

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
 const TodoItem = ({itemHTML, deleteItem, editItem}) => {
-    const[checked, setChecked] = useState(itemHTML?.isDone);
+    const[checked, setChecked] = useState(false);
     const [isEdit, setIsEdit] = useState(false);
     let todoContent;
 
@@ -21,17 +21,17 @@ const TodoItem = ({itemHTML, deleteItem, editItem}) => {
       )
     }
 
-   function checkINput() {
-    setChecked((prev) => !prev)
+   function checkINput(e) {
+    //setChecked((prev) => !prev)
+    editItem({ ...itemHTML , isDone: e.target.checked})
    } 
 
   return (
-    <div>
-
-        <input type='checkbox' checked={checked} onChange={checkINput}/>
+    <>
+        <input type='checkbox' checked={itemHTML.isDone} onChange={checkINput}/>
         {todoContent}
         <button className='btn btn-delete m-1' onClick={() => deleteItem(itemHTML.id)}>Delete</button>
-    </div>
+    </>
   )
 }
 

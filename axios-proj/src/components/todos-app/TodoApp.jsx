@@ -2,16 +2,14 @@ import React, { useState } from 'react'
 import AddItems from './AddItems';
 import TodoList from './TodoList';
 
-let nextId = 0;
-
 const TodoApp = () => {
-    const[todoInput, setTodoInput] = useState('');
+    
     const[addItems, setAddItems] = useState([]);
 
-
-    function addTodoItems(){
-        setAddItems([...addItems,  {id: nextId++, todoVal: todoInput, isDone: false}]);
-        setTodoInput('');
+    function addTodoItems(todoVal){
+      setAddItems((currentItem) => {
+        return [...currentItem, {id:crypto.randomUUID(), todoVal, isDone: false}];
+      });
     }
 
     function handleDeleteItem(id){
@@ -32,7 +30,8 @@ const TodoApp = () => {
   return (
     <div>
         <h1>Todo App</h1>
-        <AddItems todoInput={todoInput} addTodosTxt={setTodoInput} addTodo={addTodoItems}/>
+        <AddItems addTodo={addTodoItems}/>
+        {addItems.length === 0 && "No todos added"}
         <TodoList items={addItems} deleteItem={handleDeleteItem} editItem={handleEditItem}/>
     </div>
   )
