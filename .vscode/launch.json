@@ -1,0 +1,10 @@
+{
+    "configurations": [
+        {
+            "type": "chrome",
+            "name": "https://jsonplaceholder.typicode.com/todos/1",
+            "request": "launch",
+            "url": "https://jsonplaceholder.typicode.com/todos/1"
+        }
+    ]
+}
