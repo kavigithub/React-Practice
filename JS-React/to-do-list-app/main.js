@@ -3,7 +3,6 @@
 
 let taskInput = document.getElementById("task-text");
 let taskListUL = document.querySelector(".list-task ul");
-
 let arrayItem = localStorage.getItem('taskList') ? JSON.parse(localStorage.getItem('taskList')) : [];
 
 function addTask(e){
