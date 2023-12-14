@@ -29,6 +29,7 @@ const TodoApp = () => {
 
   return (
     <div>
+        <p>Ref site: 'https://react.dev/learn/updating-arrays-in-state'</p>
         <h1>Todo App</h1>
         <AddItems addTodo={addTodoItems}/>
         {addItems.length === 0 && "No todos added"}

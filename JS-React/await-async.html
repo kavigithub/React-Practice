@@ -125,6 +125,66 @@ const fetchData = async () => {
 };
 
 fetchData();
+
+
+  //another try
+  const apiUrl = 'https://reqres.in/api/login';
+  const usersUrl = 'https://reqres.in/api/users';
+const credentials = {
+  email: 'eve.holt@reqres.in',
+  password: 'cityslicka',
+};
+
+  const fetchURL = async () => {
+    try {
+     let getResponse = await fetch(apiUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(credentials)
+     });
+
+     if(!getResponse.ok) {
+      throw new Error('Page not found' + getResponse.status)
+     }
+
+     let response = await getResponse.json();
+     let authToken = response
+     //console.log(authToken.token); 
+
+     return authToken.token;
+    } catch(error){
+      console.error(error);
+    }
+  }
+
+  //fetchURL();
+
+  const getData = async() => {
+    try {
+      let getAuthToken = await fetchURL();
+      //console.log(getAuthToken);
+      let getUsers = await fetch(usersUrl, {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${getAuthToken}`
+        }
+      });
+      if(!getUsers.ok) {
+        throw new Error(getUsers.status)
+      }
+
+      const getUserList = await getUsers.json();
+     console.log(getUserList);  
+     return getUserList; 
+    } catch(error){
+      console.log(error);
+    }
+  }
+
+  getData();
+
     </script>
   </body>
 </html>

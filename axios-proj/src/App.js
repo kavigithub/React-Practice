@@ -8,6 +8,7 @@ import PlainCounter from './components/useStateConcpet/PlainCounter';
 import UpdateObjectinsideArray from './components/useStateConcpet/UpdateObjectinsideArray';
 import CompWithoutHOC from './components/HOC/CompWithoutHOC';
 import CompWithHOC from './components/HOC/Item1';
+import TodoAppWithDate from './components/to-do-with-dates/TodoAppWithDate';
 
 const PRODUCTS = [
   {category: "Fruits", price: "$1", stocked: true, name: "Apple"},
@@ -25,12 +26,13 @@ function App() {
         {/* <User></User> */}
        {/*  <Tours /> */}
        {/* <PlainCounter></PlainCounter> */}
-      {/*  <TodoApp /> */}
       {/* <FilterableProductTable products={PRODUCTS}/> */}
-      <Gallery />
+     {/*  <Gallery />
       <UpdateObjectinsideArray />
       <CompWithoutHOC></CompWithoutHOC>
-      <CompWithHOC></CompWithHOC>
+      <CompWithHOC></CompWithHOC> */}
+      {/* <TodoApp />  */} {/* this is the best eg */}
+   <TodoAppWithDate></TodoAppWithDate> 
     </div>
   );
 }

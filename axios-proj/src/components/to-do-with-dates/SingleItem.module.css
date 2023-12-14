@@ -1,0 +1,54 @@
+
+.style-single-list
+{
+    background-color: aqua;
+    margin-bottom: 10px;
+    padding: 2rem;
+}
+
+.delete-btn {
+  background-color: #ffebb3;
+  color: #5a3e2b;
+  font-family: inherit;
+  border: none;
+  border-radius: 2rem;
+  padding: 0.5rem;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  width: 100px;
+  margin: 0rem 0.5rem;
+}
+
+.edit-btn {
+  background-color: #f7c214;
+  color: #f0800f;
+  font-family: inherit;
+  border: none;
+  border-radius: 2rem;
+  padding: 0.5rem;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  width: 100px;
+  margin: 0rem 0.5rem;
+}
+
+.done-btn {
+  background-color: #09a413;
+  color: #f0f2ee;
+  font-family: inherit;
+  border: none;
+  border-radius: 2rem;
+  padding: 0.5rem;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  width: 100px;
+  margin: 0rem 0.5rem;
+}
+
+.style-done
+{
+    background-color: rgb(143, 201, 252);
+}
