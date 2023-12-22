@@ -87,9 +87,10 @@ const App = () => {
     <div className="w-50 m-auto">
       <div className="">
         <div>
+          <p>https://stackoverflow.com/questions/50275723/react-js-how-to-authenticate-credentials-via-a-fetch-statement</p>
+          <p><a href='https://javascript.plainenglish.io/basic-react-login-using-external-api-e33322e480cd'>https://javascript.plainenglish.io/basic-react-login-using-external-api-e33322e480cd</a></p>
           <img className="mb-4" src={companyLogo} alt="logo" width="180" />
           <h6 className="mb-5">Hello there, Sign in to continue</h6>
-
           <div>
             <form onSubmit={handleSubmit}>
               <div className="mb-3">

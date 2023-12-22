@@ -1,4 +1,6 @@
 import './App.css';
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.bundle.min";
 import User from './components/User';
 import FilterableProductTable from './components/filter-product-table/FilterableProductTable';
 import Gallery from './components/gallery/Gallery';
@@ -9,6 +11,8 @@ import UpdateObjectinsideArray from './components/useStateConcpet/UpdateObjectin
 import CompWithoutHOC from './components/HOC/CompWithoutHOC';
 import CompWithHOC from './components/HOC/Item1';
 import TodoAppWithDate from './components/to-do-with-dates/TodoAppWithDate';
+import BuyingItem from './components/buying-list-info/BuyingItem';
+import ContextBuyingItem from './components/context-api-bying-list/ContextBuyingItem';
 
 const PRODUCTS = [
   {category: "Fruits", price: "$1", stocked: true, name: "Apple"},
@@ -31,8 +35,11 @@ function App() {
       <UpdateObjectinsideArray />
       <CompWithoutHOC></CompWithoutHOC>
       <CompWithHOC></CompWithHOC> */}
-      {/* <TodoApp />  */} {/* this is the best eg */}
-   <TodoAppWithDate></TodoAppWithDate> 
+     {/*  <TodoApp />  */} {/* this is the best eg */}
+    {/*  <TodoAppWithDate></TodoAppWithDate>  */}
+   {/*  <BuyingItem></BuyingItem> */}
+  {/*  <BuyingItem></BuyingItem> */}
+  <ContextBuyingItem></ContextBuyingItem>
     </div>
   );
 }

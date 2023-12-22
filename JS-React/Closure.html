@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        pre code {
+  background-color: #eee;
+  border: 1px solid #999;
+  display: block;
+  padding: 20px;
+}
+    </style>
+</head>
+<body>
+    <p>The lexical environment contains two private items: a variable called privateCounter, and a function called changeBy. You can't access either of these private members from outside the Counter function. Instead, you can access them using the three public functions that are returned from the Counter wrapper.</p>
+
+    <p>Those three public functions form closures that share the same lexical environment. Thanks to JavaScript's lexical scoping, they each have access to the privateCounter variable and the changeBy function.</p>
+
+    <p>Notice how the two counters maintain their independence from one another. Each closure references a different version of the privateCounter variable through its own closure. Each time one of the counters is called, its lexical environment changes by changing the value of this variable. Changes to the variable value in one closure don't affect the value in the other closure.</p>
+
+    <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures" target="_blank">ref site</a>
+
+    <pre>
+        <code>
+        const counter = function(){
+            let privatCount = 0;
+            function changeBy(value){
+                privatCount += value
+            }
+
+            return{
+               increment(){
+                changeBy(1)
+               },
+               decrement(){
+                changeBy(-1)
+               },
+               value(){
+                return privatCount
+               }
+            }
+        };
+        console.log('-----------makeCounter1--------------')
+        const makeCounter = counter();
+        console.log("Value: " + makeCounter.value());
+        makeCounter.increment()
+        console.log("After increment Value: " + makeCounter.value());
+        makeCounter.increment();
+        console.log("After two increments Value: " + makeCounter.value());
+        makeCounter.decrement();
+        console.log("After one decrease and two increments Value: " + makeCounter.value())
+        console.log('-----------makeCounter2--------------')
+        const makeCounter2 = counter();
+        console.log("Value: " + makeCounter2.value());
+        makeCounter2.increment()
+        console.log("After increment Value: " + makeCounter2.value());
+        makeCounter2.increment();
+        console.log("After two increments Value: " + makeCounter2.value());
+        makeCounter2.decrement();
+        console.log("After one decrease and two increments Value: " + makeCounter2.value())
+    </code>
+   </pre> 
+    <script>
+        // 这是一个注释，用于说明代码的作用。
+        const counter = function(){
+            let privatCount = 0;
+            function changeBy(value){
+                privatCount += value
+            }
+
+            return{
+               increment(){
+                changeBy(1)
+               },
+               decrement(){
+                changeBy(-1)
+               },
+               value(){
+                return privatCount
+               }
+            }
+        };
+        console.log('-----------makeCounter1--------------')
+        const makeCounter = counter();
+        console.log("Value: " + makeCounter.value());
+        makeCounter.increment()
+        console.log("After increment Value: " + makeCounter.value());
+        makeCounter.increment();
+        console.log("After two increments Value: " + makeCounter.value());
+        makeCounter.decrement();
+        console.log("After one decrease and two increments Value: " + makeCounter.value())
+        console.log('-----------makeCounter2--------------')
+        const makeCounter2 = counter();
+        console.log("Value: " + makeCounter2.value());
+        makeCounter2.increment()
+        console.log("After increment Value: " + makeCounter2.value());
+        makeCounter2.increment();
+        console.log("After two increments Value: " + makeCounter2.value());
+        makeCounter2.decrement();
+        console.log("After one decrease and two increments Value: " + makeCounter2.value())
+
+    </script>
+</body>
+</html>
