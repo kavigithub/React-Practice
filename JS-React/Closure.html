@@ -14,6 +14,7 @@
     </style>
 </head>
 <body>
+    <p>Function along with its lexical environment scope build together forms Closure</p>
     <p>The lexical environment contains two private items: a variable called privateCounter, and a function called changeBy. You can't access either of these private members from outside the Counter function. Instead, you can access them using the three public functions that are returned from the Counter wrapper.</p>
 
     <p>Those three public functions form closures that share the same lexical environment. Thanks to JavaScript's lexical scoping, they each have access to the privateCounter variable and the changeBy function.</p>
@@ -65,9 +66,9 @@
     <script>
         // 这是一个注释，用于说明代码的作用。
         const counter = function(){
-            let privatCount = 0;
+            let privatCount = 0; //data privacy
             function changeBy(value){
-                privatCount += value
+                privatCount += value ////data privacy
             }
 
             return{

@@ -1,0 +1,76 @@
+<ref>https://www.youtube.com/watch?v=ypNKKYUJE5o</ref>
+
+JavaScript Security Vulnerabilities : Prevent Malicious Attack
+
+Vulnerable, because of a vulnerability called Cross Site Scripting. CSR, when malicious attacker tries to get code to execute on your machine through your browser. They try to get script to run cross-site.
+
+CSR / XSS ( Cross Site Scripting)
+	Try to injecting code into a website/webApp, that is used by attackers and the code is executed when other user tries to access some application. This can allow attacker try to access some sensitive information like login credentials or financial data.CSR, when malicious attacker tries to get code to execute on your machine through your browser. They try to get script to run cross-site. This ATTACK IS “UNDETECTED”.
+the attacker can access session tokens, cookies, and other crucial data that the browser retains. 
+
+	supposed there is query parameter in your URL : //https://example.com/setting?redirect=foo
+Here comes Javascript Protocol in picture,  Javascript Protocol means that when you visit a URL that looks like Javascript colon slash slash (site name://)
+	everything after // is interpreted as Javascript code and executed within your browser.
+	supposed I try to execute something like 
+https://example.com/setting/somebadCode() : this is potential unsafe because it could execute arbitrary	code.
+	and this is malicious link that could  execute arbitrary code on machine across scripting attack
+	to fix this we need sanitize  the URL or validate it to make sure that we are not going to run this Javascript Protocol Attack
+	for example
+ Function ValidateUrl(url){
+	const suppliedUrl =. new URL(url);
+	if(suppliedUrl.protocol === “https”){
+		return url 
+	} 
+	
+	return ‘/’ (…go home)
+}
+
+ValidateUrl(ulrName);
+
+	//Solution to prevent malicious	technique	into our Web Application	
+	1. Input validation
+	2. Sanitize techniques …used innerText instead of innerHTML
+
+(CSRF or XSRF)
+CSRF is a widespread security vulnerability in which threat actors manipulate legitimate users into submitting malicious requests to web applications they are ambushed to visit. When the web application fails to differentiate between valid user requests and forged requests, attackers can execute any malicious actions under the guise of legitimate end-users. 
+CSRF attacks can be prevented by:
+	•	Implementing secure random tokens
+	•	Logging off unused web applications
+	•	Disallowing automatic password entries by browsers
+	•	Securing session credentials
+	•	Using regularly a CSRF Scanner before every release
+
+
+SSRF : Server Site request forgery
+	What it means is that an attacker tries to dupe(cheat) a server into doing dirty work for them by using permissions that the attacker wouldn’t ordinarily have, by getting the server to execute some kind of query, that attacker won’t be able to normally do.
+	TO get confidential data without being able to do SSRF
+	const allowedURL = [‘https://interrnal.com/state’, ‘https://interrnal.com/country’];
+	const url = req.query.url;
+
+	if(!allowedURL.includes(url)){
+		return res.status(400).json({error: ‘Bad Code’})
+	}
+
+Timing Attack
+	to prevent this we can use Crypto
+		if(crypto.timingSafeEqual(account.service.token, user.service.token)){
+			return true
+	}
+
+Prototype Pollution Attack In Javascript
+	Javascript is Prototype based, every object has prototype, which is parent class that inherited its parent method from.
+	
+We have to check empty object hasOwnProperty
+	eg const someObj = {};
+	if(someObj.hasOwnPropery(token) && token){
+		response.send(‘’true)
+	}
+
+NoSQL injection
+
+Redos Attack: Regular Expression Attack: like validate email
+Used validator library
+	eg validator.isEmail(email)
+
+Mass Assignment Attack:
+   Use encrypt code for password

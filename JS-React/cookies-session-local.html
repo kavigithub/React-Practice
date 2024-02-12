@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+       localStorage.setItem('user', 'Bobd');
+       console.log(localStorage.getItem('user'))
+       localStorage.removeItem('user')
+
+       sessionStorage.setItem('user', JSON.stringify({name: 'Vishal', age: 21, }))
+       console.log(JSON.parse(sessionStorage.getItem('user')))
+
+       document.cookie = 'name=Kyle';
+       console.log(document.cookie)
+    </script>
+</body>
+</html>
