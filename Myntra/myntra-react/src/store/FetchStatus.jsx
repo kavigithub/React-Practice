@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const fetchStoreSlice = createSlice({
-    name: 'fetchingStatus',
+    name: 'fetchStatus',
     initialState: {
         isFetchingDone: false, // true : "DONE" and false : "PENDING"
         currentlyFetching: false

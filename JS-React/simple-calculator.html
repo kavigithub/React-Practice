@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="number" id="price" placeholder="add price"><br><br>
+    <button onclick="addNumber()">Submit</button>
+    
+    <p id="demo"></p>
+
+    <script>
+
+     //select the input field by its ID
+        
+function addNumber() {
+    let addNum = document.getElementById("price").value;
+    let num = [];
+    num.push(Number(addNum));
+    console.log(num);
+    document.getElementById("price").value = '';
+  /*   let numLength = num.reduce((accumalator, currentArr) => currentArr + accumalator, 0);
+    return numLength; */
+}
+
+addNumber();
+
+    </script>
+</body>
+</html>
