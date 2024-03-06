@@ -1,3 +1,4 @@
+let refLink = 'https://www.youtube.com/watch?v=lsOOs5J8ycw';
 function partern1(){
     for(let row = 1; row <= 5; row++){
         let pattern = '';
@@ -63,6 +64,64 @@ function pattern5(){
     }
 }
 pattern5();
+
+console.log('______________________')
+
+function pattern6(){
+    let n = 4; // Setting the value of 'n' to 4
+    for(let row = 0; row <= n * 2; row++){ // Looping through rows from 0 to 8 (2 times 'n')
+        let str = ''; // Creating an empty string variable 'str' to store the pattern for each row
+        let totalColumnInRow = row > n ? (n * 2 - row) : row; // Deciding the total number of columns for each row
+        console.log(n, n * 2, row, n * 2 - row, totalColumnInRow)
+
+        for(let col = 0; col <= totalColumnInRow; col++) { // Looping through columns based on the total number calculated
+           str += '* '; // Adding '*' to the 'str' for each column
+        }
+        console.log(str); // Printing the row number and the pattern for that row
+    }    
+}
+pattern6(); // Calling the function
+
+console.log('__________________________')
+
+function pattern7(){
+    let n = 4;
+    for(let row = 0; row <= n * 2; row++){
+        let str = '';
+        let totalColumnInRow = row > n ? (n * 2 - row) : row;
+
+        let numberOfSpaces = n - totalColumnInRow;
+        for(let space = 0; space <= numberOfSpaces; space++){
+            str += ' ';
+        }
+
+        for(let col = 0; col < totalColumnInRow; col++){
+            str += "* ";
+        }
+        console.log(str);
+    }
+}
+
+pattern7();
+
+console.log('__________________________');
+
+function pattern8(){
+    let num = 4;
+    for(let row = 1; row < 2 * num - 1; row++){
+        let str = '';
+        for(let column =  1; column <  2 * num - 1; column++){
+            let atEveryIndex = 123;
+            console.log(column, row);
+            str += atEveryIndex + ' '
+        }
+        console.log(str);
+    }
+}
+pattern8();
+
+
+
 
 
 

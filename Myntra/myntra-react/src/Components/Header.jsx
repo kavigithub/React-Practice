@@ -2,8 +2,10 @@ import { BsFillPersonCheckFill } from "react-icons/bs";
 import { RiHeartAddFill } from "react-icons/ri";
 import { BsFillBagPlusFill } from "react-icons/bs";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Header = () => {
+  let bagItem = useSelector(state => state.Bag);
   return (
     <header>
       <div className="logo_container">
@@ -46,7 +48,7 @@ const Header = () => {
         <Link to={`/bag`} className="action_container">
           <BsFillBagPlusFill />
           <span className="action_name text-black">Bag</span>
-          <span className="bag-item-count">0</span>
+          <span className="bag-item-count">{bagItem.length}</span>
         </Link>  
       </div>
     </header>

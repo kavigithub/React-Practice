@@ -1,5 +1,16 @@
+import { useDispatch } from "react-redux"
+import { removeFromBag } from "../store/Bag";
+import { RiDeleteBin5Fill } from "react-icons/ri";
 
 const BagItem = ({item}) => {
+  let dispatch = useDispatch();
+
+  const handleRemoveItem = () => {
+    //Calling this redux#ActionCreator with an argument will return a PayloadAction of type T with a payload of P
+
+    dispatch(removeFromBag(item.id))
+  }
+
   return (
     <div className="bag-item-container">
     <div className="item-left-part">
@@ -22,7 +33,7 @@ const BagItem = ({item}) => {
       </div>
     </div>
 
-    <div className="remove-from-cart" onClick={() => console.log('Remove item')}>X</div>
+    <div className="remove-from-cart" onClick={handleRemoveItem}><RiDeleteBin5Fill /></div>
   </div>
   )
 }
