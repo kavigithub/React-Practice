@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock, Paper, Scissorsss</title>
+</head>
+<body>
+    <button class="choiceBtn" onclick="userChoiceFun('rock')">Rock</button>
+    <button class="choiceBtn" onclick="userChoiceFun('paper')">Paper</button>
+    <button class="choiceBtn" onclick="userChoiceFun('scissor')">Scissor</button>
+    <button  id="resetButton" onclick="resetGame()">Reset Game</button>
+
+    <p>User Choice : <span class="userChoice"></span></p>
+    <p>Computer Choice : <span class="computerChoice"></span></p>
+    <p>Result :   <span class="scoreResult"></span></p>
+
+<script>
+    let userChoiceScoreTxt = document.querySelector('.userChoice');
+    let computerChoiceScoreTxt = document.querySelector(".computerChoice");
+    let scoreResult = document.querySelector(".scoreResult");
+
+    //or we can use default value || (oR) 
+    let scoreBoard = JSON.parse(localStorage.getItem('score')) || {
+        wins: 0,
+        losses: 0,
+        ties: 0
+      };
+
+    /*   
+    OR  you can use this function to save the data in local storage every time a new game is played
+    flasy value: 0 , '', undefined, false, null, NaN
+    function updateScoreBoard(){
+        of 
+        or !scoreBoard
+    if(scoreBoard === null){ 
+        scoreBoard = {
+            wins: 0,
+        losses: 0,
+        ties: 0
+        }
+      } */
+
+      //null and undefined
+      //they both defined that something doesn't have a value
+      //so what's difference between null and undefined
+      //undefined means nothing exist here
+      //null means it has been declared but not assigned any value yet
+      //null = intentionally want something to be empty.
+
+      //auto-boxing
+      //console.log('hello'.length) //5
+      //console.log('hello'.toUpperCase());
+      //Javascript automatically wraps the 'hello' string into special "object" first and this object has the property length, toUpperCase. this featrue is called auto boxing
+      //it will not work with null and undefined
+      // console.log(null.length); //will give you and error
+
+      //destrcturing : easier way to take properties out of an object
+      const object4 = {
+        message : 'Good Job',
+        price: 899
+      }
+    //const message = object4.message
+    //const {message, price}   =  object4 ;//this way we took property out an object and save in message var
+    
+     // choose user choices 
+    function userChoiceFun(param){
+        computerChoiceFun();
+        gameScore(param)
+        return param;
+    }
+   
+    // choose Computer choices 
+    function computerChoiceFun(){
+        const computerChoices = ['rock', 'paper','scissor'];
+        let randomChoiceByComputer = Math.floor(Math.random * computerChoices.length) | 0;
+        let selectComputerChoice =  computerChoices[randomChoiceByComputer];
+        console.log(`The computer chose ${selectComputerChoice}`);
+        return selectComputerChoice;
+    }
+    
+   //score funcion
+   function gameScore(userChoice){
+    let computerChoice = computerChoiceFun();
+    let result = '';
+    if (userChoice === computerChoice ) {
+        result = "It's a draw!";   
+     } else if(userChoice === 'scissor'){
+        if(computerChoice === 'rock'){
+            result = 'You Lose'
+        } else if(computerChoice === 'paper'){
+            result = 'You won'
+        } 
+     } else if(userChoice === 'paper'){
+        if(computerChoice === 'rock'){
+            result = 'You won';
+         } else if( computerChoice === 'scissor'){
+            result = 'You Lose';
+         }
+        } else if(userChoice === 'rock'){
+            if(computerChoice === 'paper'){
+                result = 'You Lose'
+            } else if(computerChoice === 'scissor') {
+                result= 'You won';
+            }
+        }
+
+        if(result === 'You won'){
+            scoreBoard.wins += 1
+        } else if(result === 'You Lose') {
+            scoreBoard.losses += 1
+        } else if (result === "It's a draw!"){
+            scoreBoard.ties += 1;
+        }
+
+         //local storage only supports string so we have to convert object into string
+         localStorage.setItem('score', JSON.stringify(scoreBoard));
+
+        userChoiceScoreTxt.innerHTML = userChoice;
+        computerChoiceScoreTxt.innerHTML = computerChoice;
+        scoreResult.innerHTML = `${result}. <br /> Your score: Wins : ${scoreBoard.wins} | Loose : ${scoreBoard.losses} | Ties : ${scoreBoard.ties}`;
+
+        console.log(scoreBoard, 'scoreBoardscoreBoard');
+     }
+
+     function resetGame(){
+        scoreBoard.wins = 0
+        scoreBoard.losses = 0,
+        scoreBoard.ties =  0
+        userChoiceScoreTxt.innerHTML = "";
+        computerChoiceScoreTxt.innerHTML = "";
+        scoreResult.innerHTML = ""
+     }
+
+    
+
+     
+
+</script>    
+</body>
+</html>
