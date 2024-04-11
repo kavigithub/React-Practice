@@ -102,6 +102,42 @@
         makeCounter2.decrement();
         console.log("After one decrease and two increments Value: " + makeCounter2.value())
 
+        function addSqures(a, b){
+            function squres(x){ //inner function is private function not accessible out side of addSqures
+                //forms a clouser inside "addSqures" lexial scope: scope means the accessibility and visibility of var/ fucn in code.
+                return x * x;
+            }
+
+            return squres(a) + squres (b);
+        }
+
+ //interview question of creating private counter       
+function private_counter(){
+    let _counter = 0;
+
+    function increment(value){
+        _counter += value
+    }
+
+    function decrement(value){
+        _counter -= value
+    }
+
+    function retrive(){
+       console.log(`Counter value is :${_counter} from private counter`);
+    }
+
+    return {
+        increment,
+        decrement,
+        retrive
+    }
+}
+
+let counter1 = private_counter(); //this will create a new private counter
+counter1.increment(5);
+counter1.increment(5);
+counter1.retrive();
     </script>
 </body>
 </html>

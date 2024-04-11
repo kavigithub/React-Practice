@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //create a method that will avilable for all strings
+        String.prototype.myMethod = function(){
+            return `${this.toUpperCase().trim()}`     
+        }
+        let str = " hello world ";
+        
+        console.log(str.myMethod());  //HELLO WORLD
+
+        //create objects that will  have the myMethod available to them
+        const obj = {
+            name: "Kioski",
+            age:23,
+            birthYear: 2000,
+            profession: "student"
+        }
+
+        const obj2 = {
+            name: "Ana",
+            age: 35,
+            birthYear: 1988
+        }
+        Object.prototype.calculateAge  = function () {
+            let currentYear = new  Date().getFullYear();
+            return currentYear - this.birthYear
+        }
+
+        const obj3 = {
+           hobby: 'Travelling'
+        } 
+        
+        //setPrototypeOf: why we are using this property?
+        /* In JavaScript, every object has a prototype property. This property is used to link one object  to another. Whenever you try to access a 
+        /*
+        /* We can use setPrototypeOf if we want to add properties and methods to an object after it has been created. This is useful when we    In JavaScript, every object has a prototype property.
+        
+        It's important to note that setting the prototype of an object is a slow operation in JavaScript, so it should be avoided if performance is a concern. Instead, you can create a new object with the desired prototype using the Object.create() method.
+
+        Object.setPrototypeOf() method is a useful tool for setting the prototype of an object, but it should be used with caution due to its performance implications. If you need to create a new object with a specific prototype, you can use the Object.create() method instead. */
+        Object.setPrototypeOf(obj, obj3)
+        console.log(obj3);
+
+        console.log(obj)
+        console.log(obj2);
+        console.log(`${obj.name} is ${obj.calculateAge()} years old`) ;// KIOSKI IS 23 YEARS OLD
+
+        console.log(`My Name Is ${obj.name.myMethod()} And I'm ${obj.age} Years Old`) ;//MY NAME IS KIOSKI AND I
+    </script>
+</body>
+</html>

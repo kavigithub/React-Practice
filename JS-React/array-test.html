@@ -6,7 +6,7 @@
     <title>Document</title>
 </head>
 <body>
-    
+    <div class="products"></div>
     <script>
         const people = [
   {
@@ -70,14 +70,125 @@ const positiveNumber = numbers.reduce((previousVal, currentVal) => {
 /*third challenge*/
 const words = ['world', 'programe', 'javascript'];
 const capitaliseArray = words.map((item) => {
-    console.log(item.charAt(0).toUpperCase(), item.substring(1));
-    console.log(item[0].toUpperCase(), item.slice(1)) ;
+   /*  console.log(item.charAt(0).toUpperCase(), item.substring(1));
+    console.log(item[0].toUpperCase(), item.slice(1)) ; */
     return (item[0].toUpperCase() + item.slice(1));   //this is a way to do it in one line of code
 });
 console.log(capitaliseArray);
 
+//4th chanlleng
+let products = [
+  {
+    name: "Dell",
+    price: 9000,
+    units: 2
+  },
+  {
+    name: "Samsung",
+    price: 5000,
+    units: 3
+  },
+  {
+    name: "HP",
+    price: 10000,
+    units: 10,
+    specialDiscount: true
+  },
+  {
+    name: 'Apple',
+    price: 2000,
+    units: 1
+  }
+];
+
+let totalProductValue = products.map((item) => {
+  return {
+    name: item.name,
+    productTotalValue: item.price * item.units
+  }
+});
+console.log(totalProductValue);
+let getContainer = document.querySelector('.products');
+getContainer.innerHTML = totalProductValue.map((item) => `<li>${item.name} : total products price is ${item.productTotalValue}</li>`).join('');
+
+//5th challeng
+let nums = [25, 7, 9, 2, 4, 4, 5, 5, 8, 2, 4, 9, 7, 10];
+let removeDulplicate = nums.filter((item, index, arr) => {
+  //nums.indexOf(item) returns the index of the first occurrence of item in the nums array.
+  //indexOf start from the begining of the Array
+  //lastIndexOf start from the ending of the Array
+   console.log(arr.indexOf(item) , item); //first occureance of current item
+   return arr.indexOf(item) === index;
+})
+
+console.log(removeDulplicate);
+
+//6th challenge
+let maxNum = nums.reduce(callBackFunc, -Infinity); //-1
+function callBackFunc(accumlator, currentVal){
+  if(accumlator > currentVal){
+    return accumlator
+  } else {
+    return currentVal
+  }
+}
+console.log(maxNum);
+
+//7th challenge
+let getTotalPrice = products.reduce((accumlator, currentItem) => {
+  return accumlator + (currentItem.price * currentItem.units)
+}, 0);
+console.log(getTotalPrice);
+
+//8th clallenge
+let numbersArr = [78, 18, 10, 5, 84, 24, 105];
+numbersArr.sort(compareFunc);
+function compareFunc(a, b){
+    //return tech karel jar
+    //1. < 0 ... a comes first;
+    //2.   0 ... nothing will be changeed;
+    //3. > 0 ... b comes first;
+    //If the result is negative, it means a should come before b.
+//If the result is positive, it means a should come after b.
+//If the result is zero, it means a and b are equal in value, so their relative order doesn't change.
+ //     a    b
+    // 78 - 18 = 60 --- result is positive...it means a should come after b..means b first
+    // 18 - 10 =  8 --- result is positive...it means a should come after b..means b first
+    // 10 -  5 =  5 --- result is positive...it means a should come after b..means b first
+    //  5 - 84 = -79 --- result is negative...it means a should come before b...means a first
+    return a - b;
+}
+console.log(numbersArr);
+
+/* Keys things keep in MIDIInput
+By returning the result of a - b, the array will be sorted in ascending order (from smallest to largest). If you wanted to sort the array in descending order, you could return b - a instead. */
 
 
+const priceSort = products.sort((a, b) => a.price - b.price);
+console.log(priceSort, 'change by sort');
+console.log(products, 'original');
+
+//coding challeng fill in array
+
+function fillInArray(n){
+  return Array(n).fill(0).map((_, index) => index + 1);
+}
+
+console.log(fillInArray(10));
+
+let num2 = [2, 8, 4, 5, 7];
+/* console.log([...num2].reverse()); */ //this will not change original array
+console.log(num2.reverse());
+console.log(num2);
+
+//Array from method create shallow copy
+const str = '123456789';
+/* const strNum = Array.from(str, convertIntoNums);
+function convertIntoNums(x){
+  return Number(x);
+} */
+
+console.log(str, strNum);
     </script>  
 </body>
 </html>

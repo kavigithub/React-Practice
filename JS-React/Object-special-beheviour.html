@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let obj1 = {
+            name: 'Object 1',
+            age: 34,
+            location: 'Pune'
+        }
+        //getOwnPropertyDescriptor this property of object defines which property you can change or not
+        console.log(Object.getOwnPropertyDescriptor(obj1, 'location'));
+        obj1.location = "MUmbai";
+        console.log(obj1);
+        //defineProperty : with the help of  this property of you can stop overwirtting property values 
+        Object.defineProperty(obj1, 'location', {
+            writable: false, //stop overwritting property value
+            enumerable: true, //for stop iterateing object by setting 'false' 
+            configurable: false
+        });
+        obj1.location = "Malad";
+        console.log(obj1);
+    </script>
+</body>
+</html>

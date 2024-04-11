@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /* In JavaScript, variables and functions are hoisted to the top of their respective scopes. However, only the declaration is hoisted, not the initialization.
+         This means that when the test() function is executed, the x variable inside the function is declared first, but it is not initialized until the var x = 20; line is reached.
+
+        can you explain me this line as var x = 10 has global scope then why can't we access it inside the function? the outer x variable is accessible inside the function, but it is being shadowed by the inner x variable with the same name.
+
+In JavaScript, when a variable with the same name is declared inside a function, it takes precedence over the outer variable with the same name. This is known as variable shadowing. The inner variable effectively hides the outer variable within the scope of the function.
+
+In your example, the outer x variable is declared in the global scope and is initialized to 10. When the test() function is executed, a new x variable is declared in the local scope of the function, initialized to 20. This inner x variable shadows the outer x variable, making it inaccessible within the scope of the function.
+
+To access the outer x variable inside the function, you can either rename the inner x variable or use the window object to access the global x variable: */
+        var x = 10;
+        function test(){
+            console.log(x); //variab
+            var x = 20;
+        }
+        test();
+        console.log(x)
+
+        /* var x = 10;
+    function test(){
+        console.log(window.x);
+    }
+    test();
+    console.log(x) */
+
+/*     Javascript has a function-level-scope. That means blocks such as if-statements and loops do not create new scopes in JavaScript. Rather a new scope is created only when a function is defined. */
+
+var xy = 10;
+    console.log(xy);
+     
+   /*  if (true) {
+        var xy = 20;
+        console.log(xy); //20
+    } 
+        console.log(xy); //20
+    */
+
+    if (true) {
+        (function(){
+            var xy = 20;
+            console.log(xy);
+        })();
+    }
+     
+    console.log(xy);
+
+    var xyz = 100;
+    function scopeTest(){
+       /*  console.log(xyz); example of variable shadowing
+        var xyz = 90; */
+        if(xyz > 200){
+            var xyz = 50;
+        }
+        console.log(xyz);
+    }
+    scopeTest();
+
+    function test2(){
+        if(false){
+            var cd = 100;
+        }
+
+        console.log(cd);
+        console.log(mi);
+
+        var mi = 'mumbai indians'
+        console.log(mi);
+    }
+
+    test2();
+
+    /* const iop;
+    console.log(iop); */
+
+    </script>
+</body>
+</html>

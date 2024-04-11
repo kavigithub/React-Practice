@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    Execution Context: JS execution context:
+    - How javascript run the file
+    - Global Execution COntext : Window - this
+    - FUnction Execution Context
+    - Eval Execution Context (Manggose env not require)
+
+    JS code: runs in two phase
+        - Memory Creation phase : where memory allocated to variables and functions.
+        - Code Execution Phase : Where it actually execute the program.
+
+        In memory creation phase:
+            if you declare your variables with var then its default value will be undefiend and
+            if you declare your variables with "let" and  "const" then their values are not available
+            For functions, its copy store in  memory.
+
+        - Code -> Tokenization -> Syntax Analysis -> JIT Compilation -> Memory Allocation -> Exec 
+        Variable declaration types:
+<code>
+    var a = 2; // variable declaration using var keyword
+    let b = 3; // variable declaration using let keyword
+    const c = 4; // constant declaration using const keyword
+    function func(num1, num2) { // Function Declaration
+        return num1 + num2;
+     } 
+
+     let sum1 =   func(3, 9);
+     let sum2 = func(8, 9);
+     console.log("Value of Sum1 is ", sum1);
+     console.log("Value of Sum2 is ", sum2);
+</code>
+
+    understand this
+        whenver JS code runs
+        1. Global Execution Context created (environment) and its allocated to "this" (window).
+        2. Memory Creation Phase:
+            if you declare your variables with var then its default value will be undefiend and
+            if you declare your variables with "let" and  "const" then their values are not available
+            For functions, store function defination in  memory (as you declare function not executed)
+        3. Code Execution Phase    
+           In this phase  all variable declared during memory allocation phase become accessible.
+           Its actually replace the "undefiend" value to actual one.
+           And once it reaches to function invocation line...its create new function execution context.
+        4. In this new "Function Exection Context" again
+        1. Memory Creation Phase happens. But this time any variable which was already there in  global execution context remains there. It does not overwrite memory allocation happens but "this" points to global
+            1. Memory Creation Phase happens but no accessibility of outer environment variables.
+            2. Code Execution Phase happens and have access to inner environment variables.
+            Function Execution Context/theard:
+                - Perfom mathomatic operations, data maupulation. code execution.
+                - if function return somthing then its return  back to global execuion context or functions parent exectuion  context.
+                - after the entire function exectuion done then this function execution deleted. so that there is no memory leakage.
+                - It has own set of Environment Record.
+                - Has Own "this".
+                - Access to parent's Environment record through .caller or .apply methods.
+                If we use arrow function then there is no own "this", instead it points to parent's "this".
+
+_____________________________________________________________________________________________________
+
+    Call Stack:
+        - Global Execution Context created  by JS engine itself.
+        - When a function called then a new Functin Execution Context created and pushed into call stack.
+        - Call stack keeps monitoring the function execution.  
+        - Once Function Execution Context get removed from call stack then it destroyed.
+        -  Maximum depth of call stack is 10 million. But JavaScript engine can handle upto 500 million calls.
+        - LIFO: Last In First Out: Call stack is keeping  track of which function exectuion.
+        context should go first so that it can clean up after its execution.
+               So that it can return back to previous function after completion of current function.
+
+
+        Closure:
+            - A function which has access to its parent scope even after its parent gets removed from the call stack. A function which has access to its outer function’
+            A closure is a JavaScript function that has access to a private scope from outside the function that created
+            - A function which has access to its parent scope even after its gets destroyed.
+            - Help us to maintain state.
+            - Create new scopes.
+
+</body>
+</html>
